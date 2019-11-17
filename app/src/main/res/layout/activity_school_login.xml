@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".SchoolLoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <EditText
+            android:layout_width="500px"
+            android:layout_height="wrap_content"
+            android:hint="Логин"
+            android:id="@+id/login"
+            android:ems="10"/>
+
+        <EditText
+            android:layout_width="500px"
+            android:layout_height="wrap_content"
+            android:hint="Пароль"
+            android:id="@+id/passwd"
+            android:ems="10"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Войти"
+            android:id="@+id/school_login_button"/>
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
