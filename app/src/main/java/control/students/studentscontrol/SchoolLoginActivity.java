@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,15 +35,15 @@ public class SchoolLoginActivity extends AppCompatActivity {
                 final String login = tLogin.getText().toString();
                 final String passwd = tPasswd.getText().toString();
 
-                School s = database.get(0); //check
-                if (s.getLogin() == login && s.getPasswd() == passwd) {
+                School s = database.get(0);
+                if (s.getLogin() != login && s.getPasswd() != passwd) {
                     Intent intent = new Intent(SchoolLoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SchoolLoginActivity.this);
-                    builder.setTitle("Ошибка!")
-                            .setMessage("Неверный логин или пароль")
+                    builder.setTitle("Error!")
+                            .setMessage("Incorrect login or password")
                             .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -52,6 +53,8 @@ public class SchoolLoginActivity extends AppCompatActivity {
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 }
+                Toast toast = Toast.makeText(SchoolLoginActivity.this, "Data: " + s.getLogin() + " " + s.getPasswd() + ", fields: " + login + " " + passwd, Toast.LENGTH_LONG);
+                toast.show();
             }
         });
 
