@@ -3,12 +3,14 @@ package control.students.studentscontrol;
 import java.util.ArrayList;
 
 public class Grade {
-    int number;
-    char letter;
-    String temp;
+    private int number;
+    private char letter;
+    public String name;
     ArrayList<Student> students;
 
-    public Grade(String temp) {
-        this.temp = temp;
+    public Grade(int number, char letter) {
+        this.number = number;
+        this.letter = letter;
+        this.name = "Grade " + Integer.toString(number) + Character.toString(letter);
     }
 }

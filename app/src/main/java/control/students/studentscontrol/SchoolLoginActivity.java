@@ -15,28 +15,28 @@ import java.util.ArrayList;
 
 public class SchoolLoginActivity extends AppCompatActivity {
 
-    ArrayList<School> database = new ArrayList<School>();
+    ArrayList<School> database = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_login);
 
-        Button button = (Button) findViewById(R.id.school_login_button);
+        Button button = findViewById(R.id.sign_in);
 
         database.add(new School("Valera", "54"));
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText tLogin = (EditText) findViewById(R.id.login);
-                EditText tPasswd = (EditText) findViewById(R.id.passwd);
+                EditText tLogin = findViewById(R.id.login);
+                EditText tPasswd = findViewById(R.id.passwd);
 
                 final String login = tLogin.getText().toString();
                 final String passwd = tPasswd.getText().toString();
 
                 School s = database.get(0);
-                if (s.getLogin() != login && s.getPasswd() != passwd) {
+                if (s.getLogin().equals(login) && s.getPasswd().equals(passwd)) {
                     Intent intent = new Intent(SchoolLoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
@@ -53,7 +53,7 @@ public class SchoolLoginActivity extends AppCompatActivity {
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 }
-                Toast toast = Toast.makeText(SchoolLoginActivity.this, "Data: " + s.getLogin() + " " + s.getPasswd() + ", fields: " + login + " " + passwd, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(SchoolLoginActivity.this, "Succesfully logged in as user " + s.getLogin(), Toast.LENGTH_LONG);
                 toast.show();
             }
         });

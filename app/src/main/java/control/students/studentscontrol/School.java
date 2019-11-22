@@ -25,6 +25,12 @@ public class School {
         return grades;
     }
 
+    public ArrayList<String> getGradesStrings() {
+        ArrayList<String> res = new ArrayList<>();
+        for (Grade s: grades) { res.add(s.name); }
+        return res;
+    }
+
     public void AddGrade(Grade g) {
         grades.add(g);
     }
