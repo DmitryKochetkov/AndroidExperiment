@@ -18,14 +18,16 @@
             android:layout_height="wrap_content"
             android:hint="Login"
             android:id="@+id/login"
-            android:ems="10"/>
+            android:ems="10"
+            android:text="Valera"/>
 
         <EditText
             android:layout_width="500px"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:id="@+id/passwd"
-            android:ems="10"/>
+            android:ems="10"
+            android:text="54"/>
 
         <Button
             android:layout_width="wrap_content"

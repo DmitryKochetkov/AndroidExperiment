@@ -11,6 +11,8 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,11 +29,24 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.add_grade: {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                Integer[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+                final Spinner sNumbers = findViewById(R.id.spinner_numbers);
+
+                Character[] letters = {'A', 'B', 'C'};
+                final Spinner sLetters = findViewById(R.id.spinner_letters);
+
+                ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, numbers);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                sNumbers.setAdapter(adapter); //null reference exception
+                //sLetters.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, letters));
+
                 builder.setTitle("New Grade")
+                        .setView(R.layout.new_grade_dialog)
                         .setPositiveButton("Add Grade", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                school.AddGrade(new Grade((Integer)sNumbers.getSelectedItem(), (Character)sLetters.getSelectedItem()));
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -80,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         school = getIntent().getExtras().getParcelable("school");
 
         ListView listView_Grades = findViewById(R.id.listview_grades);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.grade_item, R.id.text_grade, school.getGradesStrings());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.grade_item, R.id.text_grade, school.getGradesStrings()); //change to my own adapter?
         listView_Grades.setAdapter(adapter);
     }
 }

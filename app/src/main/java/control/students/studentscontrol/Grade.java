@@ -6,14 +6,10 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 public class Grade implements Parcelable {
-    private int number;
-    private char letter;
     public String name;
     //ArrayList<Student> students;
 
     public Grade(int number, char letter) {
-        this.number = number;
-        this.letter = letter;
         this.name = "Grade " + number + letter;
     }
 
