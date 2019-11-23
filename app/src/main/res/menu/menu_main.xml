@@ -3,6 +3,9 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/add_grade"
-        android:orderInCategory="100"
         android:title="Add Grade" />
+
+    <item
+        android:title="Graduation"
+        android:id="@+id/graduate"/>
 </menu>
