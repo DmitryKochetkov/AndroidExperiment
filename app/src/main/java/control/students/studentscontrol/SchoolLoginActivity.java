@@ -24,7 +24,13 @@ public class SchoolLoginActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.sign_in);
 
+        //init data (should be loaded from database)
         database.add(new School("Valera", "54"));
+        School s = database.get(0);
+        for (int i = 1; i <= 11; i++) {
+            s.AddGrade(new Grade(i, 'A'));
+            s.AddGrade(new Grade(i, 'B'));
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +44,7 @@ public class SchoolLoginActivity extends AppCompatActivity {
                 School s = database.get(0);
                 if (s.getLogin().equals(login) && s.getPasswd().equals(passwd)) {
                     Intent intent = new Intent(SchoolLoginActivity.this, MainActivity.class);
+                    intent.putExtra("school", s);
                     startActivity(intent);
                 }
                 else {

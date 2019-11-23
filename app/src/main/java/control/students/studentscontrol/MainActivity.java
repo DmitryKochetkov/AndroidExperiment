@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        school = new School("Valera", "54");
-        school.AddGrade(new Grade(1, 'A'));
+        //school = (School) getIntent().getExtras().get("school");
+        school = getIntent().getExtras().getParcelable("school");
 
         ListView listView_Grades = findViewById(R.id.listview_grades);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.grade_item, R.id.text_grade, school.getGradesStrings());
