@@ -3,12 +3,15 @@ package control.students.studentscontrol;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+
 
 public class School implements Parcelable {
     private String login;
     private String passwd;
-    private ArrayList<Grade> grades; //should be dequeue? doesn't work for classes A, B and so on yet
+    //private ArrayDeque<Grade> grades; //should be hashmap?
+    private ArrayList<Grade> grades;
 
     @Override
     public int describeContents() {
@@ -38,11 +41,13 @@ public class School implements Parcelable {
         this.login = login;
         this.passwd = passwd;
         this.grades = new ArrayList<>();
+        //this.grades = new ArrayDeque<Grade>();
     }
 
     public School(Parcel in) {
         this.login = in.readString();
         this.passwd = in.readString();
+        //this.grades = new ArrayDeque<Grade>(in.readArrayList(Grade.class.getClassLoader()));
         this.grades = in.readArrayList(Grade.class.getClassLoader());
     }
 
@@ -67,4 +72,8 @@ public class School implements Parcelable {
     public void AddGrade(Grade g) {
         grades.add(g);
     }
+
+    //Trying to make hashmap :)
+
+    private final int HASH_CAPACITY = 26*11; // 11 grades, 26 latin letters
 }

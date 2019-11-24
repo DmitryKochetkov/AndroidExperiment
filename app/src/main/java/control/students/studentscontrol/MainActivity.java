@@ -1,13 +1,16 @@
 package control.students.studentscontrol;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -17,6 +20,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     School school;
+    Spinner sNumbers;
+    Spinner sLetters;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -31,15 +36,19 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                 Integer[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-                final Spinner sNumbers = findViewById(R.id.spinner_numbers);
+                //final Spinner sNumbers = findViewById(R.id.spinner_numbers);
 
                 Character[] letters = {'A', 'B', 'C'};
-                final Spinner sLetters = findViewById(R.id.spinner_letters);
+                //final Spinner sLetters = findViewById(R.id.spinner_letters);
 
                 ArrayAdapter<Integer> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, numbers);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                if (sNumbers == null)
+                    Log.d("MainActivity", "sNumbers is null");
+
                 sNumbers.setAdapter(adapter); //null reference exception
-                //sLetters.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, letters));
+                sLetters.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, letters));
 
                 builder.setTitle("New Grade")
                         .setView(R.layout.new_grade_dialog)
@@ -52,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                school.AddGrade(new Grade(3, 'C'));
                             }
                         });
                 AlertDialog alertDialog = builder.create();
@@ -97,5 +106,17 @@ public class MainActivity extends AppCompatActivity {
         ListView listView_Grades = findViewById(R.id.listview_grades);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.grade_item, R.id.text_grade, school.getGradesStrings()); //change to my own adapter?
         listView_Grades.setAdapter(adapter);
+
+        listView_Grades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, GradeActivity.class);
+                //transfer class
+                startActivity(intent);
+            }
+        });
+
+        sNumbers = findViewById(R.id.spinner_numbers);
+        sLetters = findViewById(R.id.spinner_letters);
     }
 }
